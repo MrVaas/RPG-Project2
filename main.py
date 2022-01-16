@@ -5,3 +5,4 @@ def getusername():
     return name
 
 Username=getusername()
+print("Votre nom est : " + str(Username))
