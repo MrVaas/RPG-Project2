@@ -1,1 +1,7 @@
-# This is a sample Python script.
+def getusername():
+    name = ""
+    while name=="":
+        name=input("Votre Nom ? ")
+    return name
+
+Username=getusername()
