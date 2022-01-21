@@ -1,9 +1,11 @@
-Armure_cuire = "Armure de Cuir"
-from main import *
 
-def checkarmor():
-    armure = ""
-    global UserRace
-    global UserClasse
+"""" ARMURE TIER 1 """
+Armure_cuir_T1 = "Armure de Cuir"
+Armure_tissu_T1 = "Tunique de Tissu"
+Armure_fer_T1 = "Armure en Fer"
+Armure_arcane_T1 = "Armure Arcanique"
 
-    return armure
+""" ARMES TIER 1 """
+Arme_Baton_T1 = "Baton en bois"
+Arme_Arc_T1 = "Lance pierres"
+

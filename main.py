@@ -1,5 +1,6 @@
 import time
-from Items import *
+from items import *
+from enemies import *
 
 def getusername():
     name = ""
@@ -165,18 +166,81 @@ def getuserclasse():
                 print("Necromancien - Arcaniste - Revenant - Maitre du savoir")
     return classe
 
+def getuserarmor():
+    global UserRace
+    global UserClasse
+    armure=""
+    if UserRace == "Orc":
+        if UserClasse == "Chasseur":
+            armure = Armure_cuir_T1
+        elif UserClasse == "Chaman":
+            armure = Armure_tissu_T1
+        elif UserClasse == "Guerrier":
+            armure = Armure_fer_T1
+        elif UserClasse == "Berserk":
+            print("Le Berserk n'a aucune armure.")
+            print("Bon courrage")
+    elif UserRace == "Humain":
+        if UserClasse == "Archer":
+            armure = Armure_cuir_T1
+        elif UserClasse == "Moine":
+            armure = Armure_tissu_T1
+        elif UserClasse == "Voleur":
+            armure = Armure_cuir_T1
+        elif UserClasse == "Barde":
+            armure = Armure_cuir_T1
+    elif UserRace == "Elf":
+        if UserClasse in ("Elementaliste", "Sentinelle", "Gardien des runes"):
+            armure = Armure_tissu_T1
+        elif UserClasse == "Rodeur":
+            armure = Armure_cuir_T1
+    elif UserRace == "Centaure":
+        armure = Armure_fer_T1
+    elif UserRace == "Demon":
+        armure = Armure_arcane_T1
+
+    return armure
+
+def getuserstuff():
+    global UserArmor
+    global UserArmorName
+    global UserMana
+    global UserForce
+
+    if UserArmorName == Armure_cuir_T1:
+        UserArmor = UserArmor + 10
+    elif UserArmorName == Armure_tissu_T1:
+        UserArmor = UserArmor + 5
+        UserMana = UserMana + 10
+    elif UserArmorName == Armure_fer_T1:
+        UserArmor = UserArmor + 25
+    elif UserArmorName == Armure_arcane_T1:
+        UserMana = UserMana + 20
+        UserArmor = UserArmor + 20
+        UserForce = UserForce + 10
+
+
 
 UserMana = 0
 UserForce = 0
 UserVie = 0
 UserPrecision = 0
+UserArmor = 0
 UserName=getusername()
 UserRace=getuserrace()
 UserClasse=getuserclasse()
-UserArmor=checkarmor()
+time.sleep(1)
+"""UserArmorName=getuserarmor()
+getuserstuff()
 
 time.sleep(2)
+if UserArmor == "":
+    print(str(UserName)+ " Est un "+str(UserClasse)+ " " + str(UserRace))
+else:
+    print(str(UserName)+ " Est un "+str(UserClasse)+ " " + str(UserRace)+ " equipe d'une "+ str(UserArmorName))"""
+
 print(str(UserName)+ " Est un "+str(UserClasse)+ " " + str(UserRace))
+time.sleep(1)
 print("Vous avez "+ str(UserVie)+" HP")
 print("Vous avez "+ str(UserMana)+" MP")
 print("Vous avez "+ str(UserForce)+" de Force")
