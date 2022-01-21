@@ -1,3 +1,6 @@
+import time
+from Items import *
+
 def getusername():
     name = ""
     while name=="":
@@ -115,10 +118,51 @@ def getuserclasse():
                 print("Classe non valide")
                 print("Classe valide :")
                 print("Rodeur - Elementaliste - Sentinelle - Gardien des runes")
-    else:
-        print("VAAS IL TE RESTE ENCORE A FAIRE (CENTAURE - DEMON)")
-        print("Bon courrage bebou <3")
-
+    elif UserRace == "Centaure":
+        print("Un Centaure ? Vraiment ? C'est toi voit.")
+        while classe not in ("Archer", "Sorcier","Dueliste","Lancier"):
+            classe = input("Votre classe :")
+            if classe == "Archer":
+                UserForce = UserForce + 100
+                UserPrecision = UserPrecision + 150
+            elif classe == "Sorcier":
+                UserForce = UserForce + 150
+                UserMana = UserMana + 25
+                UserPrecision = UserPrecision + 75
+            elif classe == "Dueliste":
+                UserForce = UserForce + 150
+                UserPrecision = UserPrecision + 100
+            elif classe == "Lancier":
+                UserMana = UserMana + 60
+                UserForce = UserForce + 90
+                UserPrecision = UserPrecision + 100
+            else:
+                print("Classe non valide")
+                print("Classe valide :")
+                print("Archer - Sorcier - Dueliste - Lancier")
+    elif UserRace == "Demon":
+        print("Oh, je vois... Un Demon. Dark Sasuke")
+        while classe not in ("Necromancien", "Arcaniste", "Revenant", "Maitre du savoir"):
+            classe = input("Votre classe :")
+            if classe == "Necromancien":
+                UserMana = UserMana + 90
+                UserForce = UserForce + 35
+                UserPrecision = UserPrecision + 125
+            elif classe == "Arcaniste":
+                UserMana = UserMana + 150
+                UserForce = UserForce + 25
+                UserPrecision = UserPrecision + 75
+            elif classe == "Revenant":
+                UserForce = UserForce + 150
+                UserPrecision = UserPrecision + 100
+            elif classe == "Maitre du savoir":
+                UserMana = UserMana + 100
+                UserForce = UserForce + 90
+                UserPrecision = UserPrecision + 60
+            else:
+                print("Classe non valide")
+                print("Classe valide")
+                print("Necromancien - Arcaniste - Revenant - Maitre du savoir")
     return classe
 
 
@@ -129,8 +173,10 @@ UserPrecision = 0
 UserName=getusername()
 UserRace=getuserrace()
 UserClasse=getuserclasse()
+UserArmor=checkarmor()
 
-print(str(UserName)+ " Est un " + str(UserRace))
+time.sleep(2)
+print(str(UserName)+ " Est un "+str(UserClasse)+ " " + str(UserRace))
 print("Vous avez "+ str(UserVie)+" HP")
 print("Vous avez "+ str(UserMana)+" MP")
 print("Vous avez "+ str(UserForce)+" de Force")
