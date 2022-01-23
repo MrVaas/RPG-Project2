@@ -226,21 +226,16 @@ UserForce = 0
 UserVie = 0
 UserPrecision = 0
 UserArmor = 0
+UserMoney = 300
 UserName=getusername()
 UserRace=getuserrace()
 UserClasse=getuserclasse()
 time.sleep(1)
-"""UserArmorName=getuserarmor()
-getuserstuff()
-
-time.sleep(2)
-if UserArmor == "":
-    print(str(UserName)+ " Est un "+str(UserClasse)+ " " + str(UserRace))
-else:
-    print(str(UserName)+ " Est un "+str(UserClasse)+ " " + str(UserRace)+ " equipe d'une "+ str(UserArmorName))"""
 
 print(str(UserName)+ " Est un "+str(UserClasse)+ " " + str(UserRace))
 time.sleep(1)
 print("Vous avez "+ str(UserVie)+" HP")
 print("Vous avez "+ str(UserMana)+" MP")
 print("Vous avez "+ str(UserForce)+" de Force")
+print("Vous avez "+ str(UserMoney)+ " Gold en poche")
+
