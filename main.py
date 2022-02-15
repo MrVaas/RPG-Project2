@@ -121,7 +121,7 @@ def getuserclasse():
                 print("Classe valide :")
                 print("Rodeur - Elementaliste - Sentinelle - Gardien des runes")
     elif UserRace == "Centaure":
-        print("Un Centaure ? Vraiment ? C'est toi voit.")
+        print("Un Centaure ? Vraiment ? C'est toi qui voit.")
         while classe not in ("Archer", "Sorcier","Dueliste","Lancier"):
             classe = input("Votre classe :")
             if classe == "Archer":
@@ -239,22 +239,72 @@ def getStartPoint():
 
     return room
 
+def showShopItem(categorie):
+    global Arme_Baton_T1
+    global Arme_Arc_T1
+    global UserMoney
+    global UserEquipedWeapon
+
+    if categorie == "Armes":
+        print("Stock du marchand: ")
+        print(Arme_Arc_T1 + " (40 Gold)")
+        print(Arme_Baton_T1+ " (10 Gold)")
+        time.sleep(1.5)
+        print("Voulez vous achetez un de ces objets ?")
+        reply=""
+        while reply not in ("Oui","Non"):
+            reply=input("Oui / Non: ")
+            if reply == "Oui":
+                print("1: "+ Arme_Arc_T1)
+                print("2: "+ Arme_Baton_T1)
+                choice=""
+                while choice not in ("1","2"):
+                    choice=input("1 / 2: ")
+                    if choice== "1":
+                        UserMoney = UserMoney - 40
+                        if UserMoney < 0:
+                            print ("vous ne pouvez pas faire ça")
+                            UserMoney = UserMoney + 40
+                        else:
+                            print("Vous vennez d'acheter :"+ Arme_Arc_T1)
+                            UserEquipedWeapon = Arme_Arc_T1
+                            time.sleep(1)
+                            print(Arme_Arc_T1+" a été equipé")
+                    elif choice=="2":
+                        UserMoney = UserMoney - 10
+                        if UserMoney < 0:
+                            print ("vous ne pouvez pas faire ça")
+                            UserMoney = UserMoney + 10
+                        else:
+                            print("Vous vennez d'acheter :"+ Arme_Baton_T1)
+                            UserEquipedWeapon = Arme_Baton_T1
+                            time.sleep(1)
+                            print(Arme_Baton_T1+" a été equipé")
+                    else:
+                        print("Reponse invalide")
+            elif reply == "Non":
+                time.sleep(1)
+                print("Redirection au choix de catégories")
+                CreateRoom(room_spawn,0)
+            else:
+                print("Reponse invalide")
+    elif categorie == "Armures":
+        print("Le marchand n'a rien pour le moment.")
+
 def CreateRoom(room, state):
     if room == room_spawn:
         state = 0
-        time.sleep(0.5)
-        print("Vous avez "+str(UserMoney)+" Gold en poche")
         time.sleep(1)
         print("Armures - Armes")
-        ItemBuy=input("Quel est votre choix: ")
-        if ItemBuy == "Armes":
-            print("Vous avez Acheter des Armes ")
-            time.sleep(1)
-            print("PRANK !!!")
-        elif ItemBuy == "Armures":
-            print("Vous avez Acheter des Armures ")
-            time.sleep(1)
-            print("PRANK !!!")
+        ItemBuy=""
+        while ItemBuy not in ("Armes","Armures"):
+            ItemBuy = input("Quel est votre choix: ")
+            if ItemBuy == "Armes":
+                showShopItem(ItemBuy)
+            elif ItemBuy == "Armures":
+                showShopItem(ItemBuy)
+            else:
+                print("Choix invalide")
 
 ### GAME CODE ###
 
@@ -265,6 +315,8 @@ UserPrecision = 0
 UserArmor = 0
 UserMoney = 300
 UserState = 0
+UserEquipedWeapon = ""
+UserEquipedArmor = ""
 UserName=getusername()
 UserRace=getuserrace()
 UserClasse=getuserclasse()
