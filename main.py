@@ -1,6 +1,7 @@
 import time
 from items import *
 from enemies import *
+from room import *
 
 def getusername():
     name = ""
@@ -219,7 +220,43 @@ def getuserstuff():
         UserArmor = UserArmor + 20
         UserForce = UserForce + 10
 
+def getCombatsDegats(Attaker, Armor, Atk, VictimHP, VictimName):
 
+    VictimHP = (VictimHP + Armor) - Atk
+    dmg = Atk - Armor
+    print(str(Attaker)+ " a attaquer "+ str(VictimName))
+    time.sleep(1)
+    print(str(Attaker)+ " a fait "+ str(dmg)+ " degats")
+
+
+def getStartPoint():
+    global UserName
+    global UserMoney
+    from room import room_spawn
+
+    print(str(UserName)+" vous vennez de rentrer dans l'échoppe du Marchand !")
+    room = room_spawn
+
+    return room
+
+def CreateRoom(room, state):
+    if room == room_spawn:
+        state = 0
+        time.sleep(0.5)
+        print("Vous avez "+str(UserMoney)+" Gold en poche")
+        time.sleep(1)
+        print("Armures - Armes")
+        ItemBuy=input("Quel est votre choix: ")
+        if ItemBuy == "Armes":
+            print("Vous avez Acheter des Armes ")
+            time.sleep(1)
+            print("PRANK !!!")
+        elif ItemBuy == "Armures":
+            print("Vous avez Acheter des Armures ")
+            time.sleep(1)
+            print("PRANK !!!")
+
+### GAME CODE ###
 
 UserMana = 0
 UserForce = 0
@@ -227,6 +264,7 @@ UserVie = 0
 UserPrecision = 0
 UserArmor = 0
 UserMoney = 300
+UserState = 0
 UserName=getusername()
 UserRace=getuserrace()
 UserClasse=getuserclasse()
@@ -235,7 +273,17 @@ time.sleep(1)
 print(str(UserName)+ " Est un "+str(UserClasse)+ " " + str(UserRace))
 time.sleep(1)
 print("Vous avez "+ str(UserVie)+" HP")
+time.sleep(1)
 print("Vous avez "+ str(UserMana)+" MP")
+time.sleep(1)
 print("Vous avez "+ str(UserForce)+" de Force")
+time.sleep(1)
 print("Vous avez "+ str(UserMoney)+ " Gold en poche")
+time.sleep(1.5)
+UserRoom=getStartPoint()
+time.sleep(1.5)
+CreateRoom(room_spawn,UserState)
+
+
+
 
