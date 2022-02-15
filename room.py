@@ -13,3 +13,5 @@ room_chest1 = "Cachots"
 room_chest2 = "Salle des coffres"
 room_chest3 = "Reserve"
 room_chest4 = "Garde manger"
+
+room_state = 0
