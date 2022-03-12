@@ -309,7 +309,6 @@ def CreateRoom(room, state):
                 print("Choix invalide")
 
 ### GAME CODE ###
-
 UserMana = 0
 UserForce = 0
 UserVie = 0
