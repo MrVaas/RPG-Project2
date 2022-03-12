@@ -1,4 +1,6 @@
 import time
+import arcade
+import threading
 from items import *
 from enemies import *
 from room import *
@@ -335,6 +337,10 @@ time.sleep(1.5)
 UserRoom=getStartPoint()
 time.sleep(1.5)
 CreateRoom(room_spawn,UserState)
+
+
+print("FIN")
+
 
 
 
