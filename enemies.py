@@ -1,6 +1,6 @@
 """ Commun Ennemies """
-standart_goule = "Goule"
-standart_gnoll = "Gnoll"
+standart_goule = "Goule Sauvage"
+standart_gnoll = "Gnoll Enragée"
 standart_skaven = "Skaven"
 
 

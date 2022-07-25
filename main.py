@@ -1,6 +1,7 @@
 import time
 import arcade
 import threading
+import random
 from items import *
 from enemies import *
 from room import *
@@ -222,14 +223,110 @@ def getuserstuff():
         UserArmor = UserArmor + 20
         UserForce = UserForce + 10
 
-def getCombatsDegats(Attaker, Armor, Atk, VictimHP, VictimName):
+def hitguy(atk,victim,atkf,victimd,victimhp):
+    DMG = atkf-victimd
+    return DMG
 
-    VictimHP = (VictimHP + Armor) - Atk
-    dmg = Atk - Armor
-    print(str(Attaker)+ " a attaquer "+ str(VictimName))
+def fight(fdp):
+    global UserName
+    global UserVie
+    global UserForce
+    global UserMana
+    global UserArmor
+    global UserEquipedWeapon
+    from enemies import standart_goule
+    from enemies import standart_gnoll
+    from enemies import standart_skaven
+
+    print(str(fdp)+" vous fait face, préparez-vous au combat !")
+    if fdp in (standart_goule,standart_gnoll,standart_skaven):
+        print(str(fdp)+" est une créature standart.")
+        if fdp == standart_goule:
+            fdpHP = 450
+            fdpMP = 0
+            fdpDeg = 10
+            fdpDef = 0
+        elif fdp == standart_gnoll:
+            fdpHP = 450
+            fdpMP = 0
+            fdpDeg = 15
+            fdpDef = 0
+        elif fdp == standart_skaven:
+            fdpHP = 400
+            fdpMP = 50
+            fdpDeg = 20
+            fdpDef = 25
+        
+    elif fdp in (mid_manshoon,mid_arcaniste,mid_armurefantome):
+        print(str(fdp)+" est une créature remarquable.")
+        if fdp == mid_manshoon:
+            fdpHP = 250
+            fdpMP = 100
+            fdpDeg = 35
+            fdpDef = 30
+        elif fdp == mid_arcaniste:
+            fdpHP = 250
+            fdpMP = 100
+            fdpDeg = 40
+            fdpDef = 30
+        elif fdp == mid_armurefantome:
+            fdpHP = 50
+            fdpMP = 150
+            fdpDeg = 50
+            fdpDef = 200
+    elif fdp in (final_liche,final_demoniste,final_arcanewarrior):
+        print(str(fdp)+" est une créature monstrueuse.")
+        if fdp == final_liche:
+            fdpHP = 300
+            fdpMP = 300
+            fdpDeg = 150
+            fdpDef = 250
+        elif fdp == final_demoniste:
+            fdpHP = 310
+            fdpMP = 280
+            fdpDeg = 190
+            fdpDef = 290
+        elif fdp == final_arcanewarrior:
+            fdpHP = 360
+            fdpMP = 200
+            fdpDeg = 390
+            fdpDef = 250
+
+    print(str(fdp)+" STATS:")
     time.sleep(1)
-    print(str(Attaker)+ " a fait "+ str(dmg)+ " degats")
+    print(str(fdpHP)+" HP")
+    time.sleep(1)
+    print(str(fdpMP)+" MP")
+    time.sleep(1)
+    print(str(fdpDef)+" Def")
+    time.sleep(1)
 
+    while UserVie > 0 and fdpHP > 0:
+        PDMGE = UserForce - fdpDef
+        EDMGP = fdpDeg - UserArmor
+        PlayerAction = ""
+        while PlayerAction not in ("Fuir","Def","Atk"):
+            PlayerAction = input("Que faire ? : ")
+            if PlayerAction == "Atk":
+                dammages=hitguy(UserName,fdp,UserForce,fdpDef,fdpHP)
+                fdpHP = fdpHP - dammages
+                if fdpHP <= 0:
+                    print(fdp+" est mort !")
+                else:
+                    print(fdp +" a perdu : "+ str(PDMGE)+ "HP")
+                    replyed=hitguy(fdp,UserName,fdpDeg,UserArmor,UserVie)
+                    print(str(fdp)+" riposte !")
+                    UserVie = UserVie - replyed
+                    time.sleep(1)
+                    if UserVie <= 0:
+                        print("Vous êtes mort")
+                    else:
+                        print("Vous avez subit "+ str(replyed)+" dégats")
+                        print("Vous avez maintenant : "+str(UserVie)+" HP")
+
+            else:
+                print("Action impossible.")
+                print("Fuir - Def - Atk")
 
 def getStartPoint():
     global UserName
@@ -309,13 +406,9 @@ def CreateRoom(room, state):
                 print("Choix invalide")
         state=state+int(1)
     if room == room_dj1:
-        print("Vous Entrez dans le Donjon Du Fiak Poilu")
-        time.sleep(2)
-        print("Un Demon Apparait !")
-        time.sleep(2)
-        print("Le Demon vous frappe avec sa Lance Turborotative 6000")
-        time.sleep(1.5)
-        print("Vous etes mort au sol")
+        Enconter=random.choice([standart_goule,standart_gnoll,standart_skaven])
+        fight(Enconter)
+        state=state+int(1)
 
 ### GAME CODE ###
 UserMana = 0
