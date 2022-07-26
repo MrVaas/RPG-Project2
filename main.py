@@ -17,25 +17,25 @@ def getuserrace():
     global UserForce
     global UserVie
     race = ""
-    while race not in ("Orc","Humain","Elf","Centaure","Demon"):
-        race = input("Votre Race ? ")
-        if race == "Orc":
+    while race not in ("Orc".casefold(),"Humain".casefold(),"Elf".casefold(),"Centaure".casefold(),"Demon".casefold()):
+        race = input("Votre Race ? ").casefold()
+        if race == "Orc".casefold():
             UserMana = UserMana + 50
             UserForce = UserForce + 200
             UserVie = UserVie + 150
-        elif race == "Humain":
+        elif race == "Humain".casefold():
             UserMana = UserMana + 133
             UserForce = UserForce + 133
             UserVie = UserVie + 134
-        elif race == "Elf":
+        elif race == "Elf".casefold():
             UserMana = UserMana + 200
             UserForce = UserForce + 50
             UserVie = UserVie + 150
-        elif race == "Centaure":
+        elif race == "Centaure".casefold():
             UserMana = UserMana + 100
             UserForce = UserForce + 150
             UserVie = UserVie + 150
-        elif race == "Demon":
+        elif race == "Demon".casefold():
             UserMana = UserMana + 150
             UserForce = UserForce + 150
             UserVie = UserVie + 200
@@ -53,21 +53,21 @@ def getuserclasse():
     global UserPrecision
     classe = ""
 
-    if UserRace == "Orc":
+    if UserRace == "Orc".casefold():
         print("Un orc, tres bien. Quel serra votre Classe ?")
-        while classe not in ("Chasseur", "Chaman", "Guerrier", "Berserk"):
-            classe = input("Votre Classe : ")
-            if classe == "Chasseur":
+        while classe not in ("Chasseur".casefold(), "Chaman".casefold(), "Guerrier".casefold(), "Berserk".casefold()):
+            classe = input("Votre Classe : ").casefold()
+            if classe == "Chasseur".casefold():
                 UserForce = UserForce + 100
                 UserPrecision = UserPrecision + 150
-            elif classe == "Chaman":
+            elif classe == "Chaman".casefold():
                 UserMana = UserMana + 150
                 UserForce = UserForce + 50
                 UserPrecision = UserPrecision + 50
-            elif classe == "Guerrier":
+            elif classe == "Guerrier".casefold():
                 UserForce = UserForce + 150
                 UserPrecision = UserPrecision + 100
-            elif classe == "Berserk":
+            elif classe == "Berserk".casefold():
                 UserMana = UserMana + 50
                 UserForce = UserForce + 150
                 UserPrecision = UserPrecision + 50
@@ -76,21 +76,21 @@ def getuserclasse():
                 print("Classe valide :")
                 print("Chasseur - Chaman - Guerrier - Berserk")
 
-    elif UserRace == "Humain":
+    elif UserRace == "Humain".casefold():
         print("Un humain, classique. Quel sera votre Classe ?")
-        while classe not in ("Archer", "Moine", "Voleur", "Barde"):
-            classe = input("Votre classe : ")
-            if classe == "Archer":
+        while classe not in ("Archer".casefold(), "Moine".casefold(), "Voleur".casefold(), "Barde".casefold()):
+            classe = input("Votre classe : ").casefold()
+            if classe == "Archer".casefold():
                 UserForce = UserForce + 50
                 UserPrecision = UserPrecision + 200
-            elif classe == "Moine":
+            elif classe == "Moine".casefold():
                 UserMana = UserMana + 200
                 UserPrecision = UserPrecision + 50
-            elif classe == "Voleur":
+            elif classe == "Voleur".casefold():
                 UserMana = UserMana + 5
                 UserForce = UserForce + 95
                 UserPrecision = UserPrecision + 150
-            elif classe == "Barde":
+            elif classe == "Barde".casefold():
                 UserMana = UserMana + 150
                 UserForce = UserForce + 25
                 UserPrecision = UserPrecision + 75
@@ -99,23 +99,23 @@ def getuserclasse():
                 print("Classe valide :")
                 print("Archer - Moine - Voleur - Barde")
 
-    elif UserRace == "Elf":
+    elif UserRace == "Elf".casefold():
         print("Un elf. Vous serrez un amis des éléments. Quel sera votre classe ?")
-        while classe not in ("Rodeur", "Elementaliste", "Sentinelle", "Gardien des runes"):
-            classe = input("Votre classe : ")
-            if classe == "Rodeur":
+        while classe not in ("Rodeur".casefold(), "Elementaliste".casefold(), "Sentinelle".casefold(), "Gardien des runes".casefold()):
+            classe = input("Votre classe : ").casefold()
+            if classe == "Rodeur".casefold():
                 UserMana = UserMana + 45
                 UserForce = UserForce + 5
                 UserPrecision = UserPrecision + 200
-            elif classe == "Elementaliste":
+            elif classe == "Elementaliste".casefold():
                 UserMana = UserMana + 150
                 UserForce = UserForce + 5
                 UserPrecision = UserPrecision + 95
-            elif classe == "Sentinelle":
+            elif classe == "Sentinelle".casefold():
                 UserMana = UserMana + 90
                 UserForce = UserForce + 35
                 UserPrecision = UserPrecision + 125
-            elif classe == "Gardien des runes":
+            elif classe == "Gardien des runes".casefold():
                 UserMana = UserMana + 200
                 UserForce = UserForce + 5
                 UserPrecision = UserPrecision + 45
@@ -123,21 +123,21 @@ def getuserclasse():
                 print("Classe non valide")
                 print("Classe valide :")
                 print("Rodeur - Elementaliste - Sentinelle - Gardien des runes")
-    elif UserRace == "Centaure":
+    elif UserRace == "Centaure".casefold():
         print("Un Centaure ? Vraiment ? C'est toi qui voit.")
-        while classe not in ("Archer", "Sorcier","Dueliste","Lancier"):
-            classe = input("Votre classe :")
-            if classe == "Archer":
+        while classe not in ("Archer".casefold(), "Sorcier".casefold(),"Dueliste".casefold(),"Lancier".casefold()):
+            classe = input("Votre classe :").casefold()
+            if classe == "Archer".casefold():
                 UserForce = UserForce + 100
                 UserPrecision = UserPrecision + 150
-            elif classe == "Sorcier":
+            elif classe == "Sorcier".casefold():
                 UserForce = UserForce + 150
                 UserMana = UserMana + 25
                 UserPrecision = UserPrecision + 75
-            elif classe == "Dueliste":
+            elif classe == "Dueliste".casefold():
                 UserForce = UserForce + 150
                 UserPrecision = UserPrecision + 100
-            elif classe == "Lancier":
+            elif classe == "Lancier".casefold():
                 UserMana = UserMana + 60
                 UserForce = UserForce + 90
                 UserPrecision = UserPrecision + 100
@@ -145,22 +145,22 @@ def getuserclasse():
                 print("Classe non valide")
                 print("Classe valide :")
                 print("Archer - Sorcier - Dueliste - Lancier")
-    elif UserRace == "Demon":
+    elif UserRace == "Demon".casefold():
         print("Oh, je vois... Un Demon. Dark Sasuke")
-        while classe not in ("Necromancien", "Arcaniste", "Revenant", "Maitre du savoir"):
-            classe = input("Votre classe :")
-            if classe == "Necromancien":
+        while classe not in ("Necromancien".casefold(), "Arcaniste".casefold(), "Revenant".casefold(), "Maitre du savoir".casefold()):
+            classe = input("Votre classe :").casefold()
+            if classe == "Necromancien".casefold():
                 UserMana = UserMana + 90
                 UserForce = UserForce + 35
                 UserPrecision = UserPrecision + 125
-            elif classe == "Arcaniste":
+            elif classe == "Arcaniste".casefold():
                 UserMana = UserMana + 150
                 UserForce = UserForce + 25
                 UserPrecision = UserPrecision + 75
-            elif classe == "Revenant":
+            elif classe == "Revenant".casefold():
                 UserForce = UserForce + 150
                 UserPrecision = UserPrecision + 100
-            elif classe == "Maitre du savoir":
+            elif classe == "Maitre du savoir".casefold():
                 UserMana = UserMana + 100
                 UserForce = UserForce + 90
                 UserPrecision = UserPrecision + 60
@@ -174,33 +174,33 @@ def getuserarmor():
     global UserRace
     global UserClasse
     armure=""
-    if UserRace == "Orc":
-        if UserClasse == "Chasseur":
+    if UserRace == "Orc".casefold():
+        if UserClasse == "Chasseur".casefold():
             armure = Armure_cuir_T1
-        elif UserClasse == "Chaman":
+        elif UserClasse == "Chaman".casefold():
             armure = Armure_tissu_T1
-        elif UserClasse == "Guerrier":
+        elif UserClasse == "Guerrier".casefold():
             armure = Armure_fer_T1
-        elif UserClasse == "Berserk":
+        elif UserClasse == "Berserk".casefold():
             print("Le Berserk n'a aucune armure.")
             print("Bon courrage")
-    elif UserRace == "Humain":
+    elif UserRace == "Humain".casefold():
         if UserClasse == "Archer":
             armure = Armure_cuir_T1
-        elif UserClasse == "Moine":
+        elif UserClasse == "Moine".casefold():
             armure = Armure_tissu_T1
-        elif UserClasse == "Voleur":
+        elif UserClasse == "Voleur".casefold():
             armure = Armure_cuir_T1
-        elif UserClasse == "Barde":
+        elif UserClasse == "Barde".casefold():
             armure = Armure_cuir_T1
-    elif UserRace == "Elf":
-        if UserClasse in ("Elementaliste", "Sentinelle", "Gardien des runes"):
+    elif UserRace == "Elf".casefold():
+        if UserClasse in ("Elementaliste".casefold(), "Sentinelle".casefold(), "Gardien des runes".casefold()):
             armure = Armure_tissu_T1
-        elif UserClasse == "Rodeur":
+        elif UserClasse == "Rodeur".casefold():
             armure = Armure_cuir_T1
-    elif UserRace == "Centaure":
+    elif UserRace == "Centaure".casefold():
         armure = Armure_fer_T1
-    elif UserRace == "Demon":
+    elif UserRace == "Demon".casefold():
         armure = Armure_arcane_T1
 
     return armure
@@ -242,7 +242,7 @@ def fight(fdp):
     if fdp in (standart_goule,standart_gnoll,standart_skaven):
         print(str(fdp)+" est une créature standart.")
         if fdp == standart_goule:
-            fdpHP = 450
+            fdpHP = 420
             fdpMP = 0
             fdpDeg = 10
             fdpDef = 0
@@ -260,34 +260,34 @@ def fight(fdp):
     elif fdp in (mid_manshoon,mid_arcaniste,mid_armurefantome):
         print(str(fdp)+" est une créature remarquable.")
         if fdp == mid_manshoon:
-            fdpHP = 250
+            fdpHP = 650
             fdpMP = 100
             fdpDeg = 35
             fdpDef = 30
         elif fdp == mid_arcaniste:
-            fdpHP = 250
+            fdpHP = 650
             fdpMP = 100
             fdpDeg = 40
             fdpDef = 30
         elif fdp == mid_armurefantome:
-            fdpHP = 50
+            fdpHP = 250
             fdpMP = 150
             fdpDeg = 50
             fdpDef = 200
     elif fdp in (final_liche,final_demoniste,final_arcanewarrior):
         print(str(fdp)+" est une créature monstrueuse.")
         if fdp == final_liche:
-            fdpHP = 300
+            fdpHP = 1000
             fdpMP = 300
             fdpDeg = 150
             fdpDef = 250
         elif fdp == final_demoniste:
-            fdpHP = 310
+            fdpHP = 1010
             fdpMP = 280
             fdpDeg = 190
             fdpDef = 290
         elif fdp == final_arcanewarrior:
-            fdpHP = 360
+            fdpHP = 1060
             fdpMP = 200
             fdpDeg = 390
             fdpDef = 250
@@ -305,9 +305,9 @@ def fight(fdp):
         PDMGE = UserForce - fdpDef
         EDMGP = fdpDeg - UserArmor
         PlayerAction = ""
-        while PlayerAction not in ("Fuir","Def","Atk"):
-            PlayerAction = input("Que faire ? : ")
-            if PlayerAction == "Atk":
+        while PlayerAction not in ("Fuir".casefold(),"Def".casefold(),"Atk".casefold()):
+            PlayerAction = input("Que faire ? : ").casefold()
+            if PlayerAction == "Atk".casefold():
                 dammages=hitguy(UserName,fdp,UserForce,fdpDef,fdpHP)
                 fdpHP = fdpHP - dammages
                 if fdpHP <= 0:
@@ -344,16 +344,16 @@ def showShopItem(categorie):
     global UserMoney
     global UserEquipedWeapon
 
-    if categorie == "Armes":
+    if categorie == "Armes".casefold():
         print("Stock du marchand: ")
         print(Arme_Arc_T1 + " (40 Gold)")
         print(Arme_Baton_T1+ " (10 Gold)")
         time.sleep(1.5)
         print("Voulez vous achetez un de ces objets ?")
         reply=""
-        while reply not in ("Oui","Non"):
-            reply=input("Oui / Non: ")
-            if reply == "Oui":
+        while reply not in ("Oui".casefold(),"Non".casefold()):
+            reply=input("Oui / Non: ").casefold()
+            if reply == "Oui".casefold():
                 print("1: "+ Arme_Arc_T1)
                 print("2: "+ Arme_Baton_T1)
                 choice=""
@@ -381,29 +381,33 @@ def showShopItem(categorie):
                             print(Arme_Baton_T1+" a été equipé")
                     else:
                         print("Reponse invalide")
-            elif reply == "Non":
+            elif reply == "Non".casefold():
                 time.sleep(1)
                 print("Redirection au choix de catégories")
                 CreateRoom(room_spawn,0)
             else:
                 print("Reponse invalide")
-    elif categorie == "Armures":
+    elif categorie == "Armures".casefold():
         print("Le marchand n'a rien pour le moment.")
+        CreateRoom(room_spawn,0)
 
 def CreateRoom(room, state):
     if room == room_spawn:
         state = 0
         time.sleep(1)
-        print("Armures - Armes")
+        print("Armures - Armes - Rien")
         ItemBuy=""
-        while ItemBuy not in ("Armes","Armures"):
-            ItemBuy = input("Quel est votre choix: ")
-            if ItemBuy == "Armes":
+        while ItemBuy not in ("Armes".casefold(),"Armures".casefold(),"Rien".casefold()):
+            ItemBuy = input("Quel est votre choix: ").casefold()
+            if ItemBuy == "Armes".casefold():
                 showShopItem(ItemBuy)
-            elif ItemBuy == "Armures":
+            elif ItemBuy == "Armures".casefold():
                 showShopItem(ItemBuy)
+            elif ItemBuy == "Rien".casefold():
+                print("Vous quittez l'échoppe du Marchand !")
             else:
                 print("Choix invalide")
+                print("Armes - Armures - Rien")
         state=state+int(1)
     if room == room_dj1:
         Enconter=random.choice([standart_goule,standart_gnoll,standart_skaven])
