@@ -323,6 +323,25 @@ def fight(fdp):
                     else:
                         print("Vous avez subit "+ str(replyed)+" dégats")
                         print("Vous avez maintenant : "+str(UserVie)+" HP")
+            elif PlayerAction == "Def".casefold():
+                replyed=hitguy(fdp,UserName,fdpDeg,UserArmor,UserVie)
+                print(UserName+" se protège !")
+                time.sleep(1)
+                UserVie = UserVie - replyed
+                print("Vous avez perdu"+ str(replyed)+" HP")
+
+            elif PlayerAction == "Fuir".casefold():
+                print("Vous prennez la fuite et quittez le donjon !")
+                time.sleep(1)
+                print("Vous avez réussi à échapper à l'affrontement")
+                time.sleep(1)
+                print("Vous voilà hors du donjon !")
+                time.sleep(1)
+                print("Vous avez echoué à votre Mission !")
+                time.sleep(1)
+                print("GAME OVER !")
+                time.sleep(3)
+                quit()
 
             else:
                 print("Action impossible.")
