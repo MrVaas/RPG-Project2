@@ -293,31 +293,34 @@ def fight(fdp):
             fdpDef = 250
 
     print(str(fdp)+" STATS:")
-    time.sleep(1)
+    time.sleep(2)
     print(str(fdpHP)+" HP")
-    time.sleep(1)
+    time.sleep(2)
     print(str(fdpMP)+" MP")
-    time.sleep(1)
+    time.sleep(2)
     print(str(fdpDef)+" Def")
-    time.sleep(1)
+    time.sleep(2)
 
     while UserVie > 0 and fdpHP > 0:
         PDMGE = UserForce - fdpDef
         EDMGP = fdpDeg - UserArmor
         PlayerAction = ""
         while PlayerAction not in ("Fuir".casefold(),"Def".casefold(),"Atk".casefold()):
+            time.sleep(2)
             PlayerAction = input("Que faire ? : ").casefold()
             if PlayerAction == "Atk".casefold():
                 dammages=hitguy(UserName,fdp,UserForce,fdpDef,fdpHP)
                 fdpHP = fdpHP - dammages
                 if fdpHP <= 0:
+                    time.sleep(2)
                     print(fdp+" est mort !")
                 else:
                     print(fdp +" a perdu : "+ str(PDMGE)+ "HP")
+                    time.sleep(2)
                     replyed=hitguy(fdp,UserName,fdpDeg,UserArmor,UserVie)
                     print(str(fdp)+" riposte !")
                     UserVie = UserVie - replyed
-                    time.sleep(1)
+                    time.sleep(2)
                     if UserVie <= 0:
                         print("Vous êtes mort")
                     else:
@@ -346,6 +349,48 @@ def fight(fdp):
             else:
                 print("Action impossible.")
                 print("Fuir - Def - Atk")
+
+def lootroom (roomstate):
+    global UserVie
+
+    from items import loot_eat
+    from items import loot_heal
+    from items import loot_throw
+
+    content = ""
+    trap = "trap"
+    gift = "gift"
+    vide = "vide"
+    eat = loot_eat
+    heal = loot_heal
+    throw = loot_throw
+
+    time.sleep(2)
+
+    print("Vous faites face à un coffre.")
+    time.sleep(2)
+    chest=""
+    while chest not in("Oui".casefold(),"Non".casefold()):
+        chest=input("Voulez-vous l'ouvrir ? ").casefold()
+        if chest=="Oui".casefold():
+            content=random.choice([trap,gift,vide])
+            if content == trap:
+                print("Le Coffre étais piéger !")
+                time.sleep(2)
+                UserVie = UserVie - 5
+                print("Vous avez perdu 5 HP")
+            elif content == gift:
+                print("Il ne semble pas être piéger")
+                time.sleep(2)
+                gift=random.choice([eat,heal,throw])
+                if gift == eat:
+                    print("Vous avez trouver : "+ eat)
+                elif gift == heal:
+                    print("Vous avez trouver : "+ heal)
+                elif gift == throw:
+                    print("Vous avez trouver : "+throw)
+            elif content == vide:
+                print("Le Coffre est Vide.")
 
 def getStartPoint():
     global UserName
@@ -432,6 +477,9 @@ def CreateRoom(room, state):
         Enconter=random.choice([standart_goule,standart_gnoll,standart_skaven])
         fight(Enconter)
         state=state+int(1)
+    if room == room_chest1:
+        lootroom(state)
+
 
 ### GAME CODE ###
 UserMana = 0
@@ -461,7 +509,10 @@ time.sleep(1.5)
 UserRoom=getStartPoint()
 time.sleep(1.5)
 CreateRoom(room_spawn,UserState)
+time.sleep(2)
 CreateRoom(room_dj1,UserState)
+time.sleep(2)
+CreateRoom(room_chest1,UserState)
 
 print("FIN")
 time.sleep(5)
