@@ -138,7 +138,6 @@ def getuserclasse():
                 UserForce = UserForce + 150
                 UserPrecision = UserPrecision + 100
             elif classe == "Lancier".casefold():
-                classe = "Lancier"
                 UserMana = UserMana + 60
                 UserForce = UserForce + 90
                 UserPrecision = UserPrecision + 100
