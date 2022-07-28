@@ -138,6 +138,7 @@ def getuserclasse():
                 UserForce = UserForce + 150
                 UserPrecision = UserPrecision + 100
             elif classe == "Lancier".casefold():
+                classe = "Lancier"
                 UserMana = UserMana + 60
                 UserForce = UserForce + 90
                 UserPrecision = UserPrecision + 100
@@ -175,6 +176,7 @@ def getuserarmor():
     global UserClasse
     armure=""
     if UserRace == "Orc".casefold():
+        UserRace = "Orc"
         if UserClasse == "Chasseur".casefold():
             armure = Armure_cuir_T1
         elif UserClasse == "Chaman".casefold():
@@ -185,6 +187,7 @@ def getuserarmor():
             print("Le Berserk n'a aucune armure.")
             print("Bon courrage")
     elif UserRace == "Humain".casefold():
+        UserRace = "Humain"
         if UserClasse == "Archer":
             armure = Armure_cuir_T1
         elif UserClasse == "Moine".casefold():
@@ -194,13 +197,16 @@ def getuserarmor():
         elif UserClasse == "Barde".casefold():
             armure = Armure_cuir_T1
     elif UserRace == "Elf".casefold():
+        UserRace = "Elf"
         if UserClasse in ("Elementaliste".casefold(), "Sentinelle".casefold(), "Gardien des runes".casefold()):
             armure = Armure_tissu_T1
         elif UserClasse == "Rodeur".casefold():
             armure = Armure_cuir_T1
     elif UserRace == "Centaure".casefold():
+        UserRace = "Centaure"
         armure = Armure_fer_T1
     elif UserRace == "Demon".casefold():
+        UserRace = "Demon"
         armure = Armure_arcane_T1
 
     return armure
@@ -234,6 +240,10 @@ def fight(fdp):
     global UserMana
     global UserArmor
     global UserEquipedWeapon
+    global UserThrowItem
+    global UserThrowItemNb
+    from items import Arme_Arc_T1
+    from items import Arme_Baton_T1
     from enemies import standart_goule
     from enemies import standart_gnoll
     from enemies import standart_skaven
@@ -305,17 +315,120 @@ def fight(fdp):
         PDMGE = UserForce - fdpDef
         EDMGP = fdpDeg - UserArmor
         PlayerAction = ""
-        while PlayerAction not in ("Fuir".casefold(),"Def".casefold(),"Atk".casefold()):
+        while PlayerAction not in ("Throw".casefold(),"Use".casefold(),"Fuir".casefold(),"Def".casefold(),"Atk".casefold()):
             time.sleep(2)
             PlayerAction = input("Que faire ? : ").casefold()
-            if PlayerAction == "Atk".casefold():
+            if PlayerAction == "Use".casefold():
+                print("Vous utilisez : "+str(UserEquipedWeapon))
+                if UserEquipedWeapon == Arme_Baton_T1:
+                    dammages=hitguy(UserName,fdp,UserForce+40,fdpDef,fdpHP)
+                    fdpHP = fdpHP - dammages
+                    if fdpHP <= 0:
+                        time.sleep(2)
+                        print(fdp+" est mort !")
+                    else:
+                        print(fdp +" a perdu : "+ str(dammages)+ "HP")
+                        time.sleep(2)
+                        replyed=hitguy(fdp,UserName,fdpDeg,UserArmor,UserVie)
+                        print(str(fdp)+" riposte !")
+                        UserVie = UserVie - replyed
+                        time.sleep(2)
+                    if UserVie <= 0:
+                        print("Vous êtes mort")
+                    else:
+                        print("Vous avez subit "+ str(replyed)+" dégats")
+                        print("Vous avez maintenant : "+str(UserVie)+" HP")
+                elif UserEquipedWeapon == Arme_Arc_T1:
+                    dammages=hitguy(UserName,fdp,UserForce+20,fdpDef,fdpHP)
+                    fdpHP = fdpHP - dammages
+                    if fdpHP <= 0:
+                        time.sleep(2)
+                        print(fdp+" est mort !")
+                    else:
+                        print(fdp +" a perdu : "+ str(dammages)+ "HP")
+                        time.sleep(2)
+
+                        luck=random.uniform(0,50)
+
+                        replyed=hitguy(fdp,UserName,fdpDeg-luck,UserArmor,UserVie)
+                        print(str(fdp)+" Envoi une Pierre pour riposter !")
+                        if replyed <= 0:
+                            replyed = 0
+                            time.sleep(2)
+                            print("Vous avez esquivé la pierre")
+                        UserVie = UserVie - replyed
+                        time.sleep(2)
+                        if UserVie <= 0:
+                            print("Vous êtes mort")
+                        else:
+                            print("Vous avez subit "+ str(replyed)+" dégats")
+                            print("Vous avez maintenant : "+str(UserVie)+" HP")
+                else:
+                    print("Vous n'avez pas d'armes")
+                    replyed=hitguy(fdp,UserName,fdpDeg,UserArmor,UserVie)
+                    print(str(fdp)+" Envoi une Pierre pour riposter !")
+                    if replyed <= 0:
+                        replyed = 0
+                        time.sleep(2)
+                        print("Vous avez esquivé la pierre")
+                    UserVie = UserVie - replyed
+                    time.sleep(2)
+                    if UserVie <= 0:
+                        print("Vous êtes mort")
+                    else:
+                        print("Vous avez subit "+ str(replyed)+" dégats")
+                        print("Vous avez maintenant : "+str(UserVie)+" HP")
+
+            elif PlayerAction == "Throw".casefold():
+                if UserThrowItemNb > 0:
+                    print("Vous jettez "+ UserThrowItem)
+                    time.sleep(2)
+                    throwluck=random.uniform(0,50)
+                    if throwluck > 25:
+                        dammages=hitguy(UserName,fdp,UserForce+35,fdpDef,fdpHP)
+                        fdpHP = fdpHP - dammages
+                        if fdpHP <= 0:
+                            time.sleep(2)
+                            print(fdp+" est mort !")
+                        else:
+                            print(fdp +" a perdu : "+ str(dammages)+ "HP")
+                            time.sleep(2)
+
+                            luck=random.uniform(0,50)
+
+                            replyed=hitguy(fdp,UserName,fdpDeg-luck,UserArmor,UserVie)
+                            print(str(fdp)+" Envoi une Pierre pour riposter !")
+                            if replyed <= 0:
+                                replyed = 0
+                                time.sleep(2)
+                                print("Vous avez esquivé la pierre")
+                            UserVie = UserVie - replyed
+                            time.sleep(2)
+                            if UserVie <= 0:
+                                print("Vous êtes mort")
+                            else:
+                                print("Vous avez subit "+ str(replyed)+" dégats")
+                                print("Vous avez maintenant : "+str(UserVie)+" HP")
+                    elif throwluck < 25:
+                        print("Vous avez manqué la cible")
+                        replyed=hitguy(fdp,UserName,fdpDeg,UserArmor,UserVie)
+                        print(str(fdp)+" riposte !")
+                        UserVie = UserVie - replyed
+                        time.sleep(2)
+                        if UserVie <= 0:
+                            print("Vous êtes mort")
+                        else:
+                            print("Vous avez subit "+ str(replyed)+" dégats")
+                            print("Vous avez maintenant : "+str(UserVie)+" HP")
+
+            elif PlayerAction == "Atk".casefold():
                 dammages=hitguy(UserName,fdp,UserForce,fdpDef,fdpHP)
                 fdpHP = fdpHP - dammages
                 if fdpHP <= 0:
                     time.sleep(2)
                     print(fdp+" est mort !")
                 else:
-                    print(fdp +" a perdu : "+ str(PDMGE)+ "HP")
+                    print(fdp +" a perdu : "+ str(dammages)+ "HP")
                     time.sleep(2)
                     replyed=hitguy(fdp,UserName,fdpDeg,UserArmor,UserVie)
                     print(str(fdp)+" riposte !")
@@ -348,10 +461,13 @@ def fight(fdp):
 
             else:
                 print("Action impossible.")
-                print("Fuir - Def - Atk")
+                print("Fuir - Def - Atk - Use - Throw")
 
 def lootroom (roomstate):
     global UserVie
+    global UserForce
+    global UserThrowItem
+    global UserThrowItemNb
 
     from items import loot_eat
     from items import loot_heal
@@ -385,10 +501,20 @@ def lootroom (roomstate):
                 gift=random.choice([eat,heal,throw])
                 if gift == eat:
                     print("Vous avez trouver : "+ eat)
+                    time.sleep(2)
+                    print("Vous utilisez "+eat+" vous vous sentez restauré")
+                    UserForce = UserForce + 5
+                    UserVie = UserVie + 15
                 elif gift == heal:
                     print("Vous avez trouver : "+ heal)
+                    time.sleep(2)
+                    print("Vous utilisez "+heal+" votre vie augmente")
+                    UserVie = UserVie + 30
                 elif gift == throw:
                     print("Vous avez trouver : "+throw)
+                    UserThrowItem = throw
+                    UserThrowItemNb = UserThrowItemNb + 1
+                    print(throw + " a été ajouté à votre inventaire")
             elif content == vide:
                 print("Le Coffre est Vide.")
 
@@ -477,9 +603,34 @@ def CreateRoom(room, state):
         Enconter=random.choice([standart_goule,standart_gnoll,standart_skaven])
         fight(Enconter)
         state=state+int(1)
-    if room == room_chest1:
+    elif room == room_dj2:
+        Enconter=random.choice([standart_goule,standart_gnoll,standart_skaven])
+        fight(Enconter)
+        state=state+int(1)
+    elif room == room_dj3:
+        Enconter=random.choice([standart_goule,standart_gnoll,standart_skaven])
+        fight(Enconter)
+        state=state+int(1)
+    elif room == room_dj4:
+        Enconter=random.choice([mid_manshoon,mid_arcaniste,mid_armurefantome])
+        fight(Enconter)
+        state=state+int(1)
+    elif room == room_dj5:
+        Enconter=random.choice([final_arcanewarrior,final_demoniste,final_liche])
+        fight(Enconter)
+        state=state+int(1)
+    elif room == room_chest1:
         lootroom(state)
-
+        state=state+int(1)
+    elif room == room_chest2:
+        lootroom(state)
+        state=state+int(1)
+    elif room == room_chest3:
+        lootroom(state)
+        state=state+int(1)
+    elif room == room_chest4:
+        lootroom(state)
+        state=state+int(1)
 
 ### GAME CODE ###
 UserMana = 0
@@ -491,10 +642,22 @@ UserMoney = 300
 UserState = 0
 UserEquipedWeapon = ""
 UserEquipedArmor = ""
+UserThrowItem = ""
+UserThrowItemNb = 0
 UserName=getusername()
 UserRace=getuserrace()
 UserClasse=getuserclasse()
 time.sleep(1)
+
+## CHEAT ZONE UwU ##
+if UserName == "Alakazam":
+    if UserRace == "orc":
+        if UserClasse == "chaman":
+            UserForce = 10000
+            UserVie = 10000
+            UserArmor = 10000
+            UserMana = 10000
+            print("Alakazam le Chaman - Activé")
 
 print(str(UserName)+ " Est un "+str(UserClasse)+ " " + str(UserRace))
 time.sleep(1)
@@ -513,8 +676,23 @@ time.sleep(2)
 CreateRoom(room_dj1,UserState)
 time.sleep(2)
 CreateRoom(room_chest1,UserState)
+time.sleep(2)
+CreateRoom(room_dj2,UserState)
+time.sleep(2)
+CreateRoom(room_chest2,UserState)
+time.sleep(2)
+CreateRoom(room_dj3,UserState)
+time.sleep(2)
+CreateRoom(room_chest3,UserState)
+time.sleep(2)
+CreateRoom(room_dj4,UserState)
+time.sleep(2)
+CreateRoom(room_chest4,UserState)
+time.sleep(2)
+CreateRoom(room_dj5,UserState)
 
-print("FIN")
+
+print("Vous êtes arrivé à la fin du jeu. Bravo !")
 time.sleep(5)
 
 
