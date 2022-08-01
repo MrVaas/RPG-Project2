@@ -5,6 +5,7 @@ import random
 from items import *
 from enemies import *
 from room import *
+from perks import *
 
 def getusername():
     name = ""
@@ -600,6 +601,7 @@ def CreateRoom(room, state):
         state=state+int(1)
     if room == room_dj1:
         Enconter=random.choice([standart_goule,standart_gnoll,standart_skaven])
+        getperks(UserLevel,UserClasse,UserRace)
         fight(Enconter)
         state=state+int(1)
     elif room == room_dj2:
@@ -639,6 +641,7 @@ UserPrecision = 0
 UserArmor = 0
 UserMoney = 300
 UserState = 0
+UserLevel = 0
 UserEquipedWeapon = ""
 UserEquipedArmor = ""
 UserThrowItem = ""
